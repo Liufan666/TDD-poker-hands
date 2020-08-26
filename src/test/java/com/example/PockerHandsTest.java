@@ -42,4 +42,16 @@ public class PockerHandsTest {
     //then
     assertEquals("Player 2 wins",result);
   }
+
+  @Test
+  void should_return_Player_1_wins_when_compare_given_palyer1_3H3D2S2CKD_and_player2_2H3D5S9C5D(){
+    //given
+    String[] player_1 = {"3H","3D","2S","2C","KD"};
+    String[] player_2 = {"2H","3D","5S","9C","5D"};
+    PockerHands pockerHands = new PockerHands();
+    //when
+    String result = pockerHands.compare(player_1,player_2);
+    //then
+    assertEquals("Player 1 wins",result);
+  }
 }
