@@ -17,6 +17,12 @@ public class PockerHands {
     Integer[] player_2_number=countMapMaxNum(player_2_map);
     boolean isPlayer_1_Straight = isStraight(player_1);
     boolean isPlayer_2_Straight = isStraight(player_2);
+    if(isPlayer_1_Straight && isPlayer_2_Straight){
+      if(isPlayer2Win(player_1,player_2)){
+        return "Player 2 wins";
+      }
+      return "Player 1 wins";
+    }
     if(isPlayer_1_Straight){
       return "Player 1 wins";
     }
