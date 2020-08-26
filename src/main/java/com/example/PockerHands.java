@@ -21,7 +21,7 @@ public class PockerHands {
     //Integer player_1_maxNum =
     int player_1_maxNum = Collections.max(player_1_numbers);
     int player_2_maxNum = Collections.max(player_2_numbers);
-    return player_1_maxNum<=player_2_maxNum;
+    return player_1_maxNum<player_2_maxNum;
   }
 
   private ArrayList<Integer> transToArrayList(String[] player) {
