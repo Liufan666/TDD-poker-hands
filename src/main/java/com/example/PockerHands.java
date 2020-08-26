@@ -15,6 +15,14 @@ public class PockerHands {
     HashMap<Integer, Integer> player_2_map=transToMap(player_2);
     Integer[] player_1_number=countMapMaxNum(player_1_map);
     Integer[] player_2_number=countMapMaxNum(player_2_map);
+    boolean isPlayer_1_Straight = isStraight(player_1);
+    boolean isPlayer_2_Straight = isStraight(player_2);
+    if(isPlayer_1_Straight){
+      return "Player 1 wins";
+    }
+    if(isPlayer_2_Straight){
+      return "Player 2 wins";
+    }
     if (player_1_map.size()<player_2_map.size()){
       return "Player 1 wins";
     }
@@ -34,6 +42,18 @@ public class PockerHands {
       return "Player 2 wins";
     }
     return "Player 1 wins";
+  }
+
+  private boolean isStraight(String[] player) {
+    ArrayList<Integer> player_numbers = transToArrayList(player);
+    if(player_numbers.size()<5){
+      return false;
+    }
+    Integer min = Collections.min(player_numbers);
+    if(player_numbers.contains(min+1)&&player_numbers.contains(min+2)&&player_numbers.contains(min+3)&&player_numbers.contains(min+4)){
+      return true;
+    }
+    return false;
   }
 
   boolean isPlayer2Win(String[] player_1, String[] player_2){
