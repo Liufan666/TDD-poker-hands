@@ -5,10 +5,20 @@ import static java.util.Collections.max;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class PockerHands {
 
   public String compare(String[] player_1, String[] player_2) {
+    HashSet<Character> player_1_set=transToSet(player_1);
+    HashSet<Character> player_2_set=transToSet(player_2);
+    if (player_1_set.size()<player_2_set.size()){
+      return "Player 1 wins";
+    }
+    if (player_1_set.size()>player_2_set.size()) {
+      return "Player 2 wins";
+    }
     if(isPlayer2Win(player_1,player_2)){
       return "Player 2 wins";
     }
@@ -40,6 +50,13 @@ public class PockerHands {
     return player_numbers;
   }
 
+  private HashSet<Character> transToSet(String[] player){
+    HashSet<Character> player_set=new HashSet<>();
+    for (String s : player) {
+      player_set.add(s.charAt(0));
+    }
+    return player_set;
+  }
 
 
 }
