@@ -13,13 +13,21 @@ public class PockerHands {
   public String compare(String[] player_1, String[] player_2) {
     HashMap<Integer, Integer> player_1_map=transToMap(player_1);
     HashMap<Integer, Integer> player_2_map=transToMap(player_2);
+    Integer[] player_1_number=countMapMaxNum(player_1_map);
+    Integer[] player_2_number=countMapMaxNum(player_2_map);
     if (player_1_map.size()<player_2_map.size()){
       return "Player 1 wins";
     }
     if (player_1_map.size()>player_2_map.size()) {
       return "Player 2 wins";
     }
-    if (countMapMaxNum(player_1_map)<countMapMaxNum(player_2_map)){
+    if(player_1_number[1]>player_2_number[1]){
+      return "Player 1 wins";
+    }
+    if(player_1_number[1]<player_2_number[1]){
+      return "Player 2 wins";
+    }
+    if (player_1_number[0]<player_2_number[0]){
       return "Player 2 wins";
     }
     if(isPlayer2Win(player_1,player_2)){
@@ -72,8 +80,8 @@ public class PockerHands {
     return player_map;
   }
 
-  private Integer countMapMaxNum(HashMap<Integer, Integer> hashMap){
-    int max=0;
+  private Integer[] countMapMaxNum(HashMap<Integer, Integer> hashMap){
+    Integer max=0;
     Integer maxCount=0;
     for (Entry<Integer, Integer> characterIntegerEntry : hashMap.entrySet()) {
       if (characterIntegerEntry.getValue()>=maxCount){
@@ -81,7 +89,7 @@ public class PockerHands {
         max= characterIntegerEntry.getKey();
       }
     }
-    return max;
+    return new Integer[]{max, maxCount};
   }
 
 }
