@@ -3,20 +3,23 @@ package com.example;
 import static java.util.Collections.max;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 
 public class PockerHands {
 
   public String compare(String[] player_1, String[] player_2) {
-    HashSet<Character> player_1_set=transToSet(player_1);
-    HashSet<Character> player_2_set=transToSet(player_2);
-    if (player_1_set.size()<player_2_set.size()){
+    HashMap<Integer, Integer> player_1_map=transToMap(player_1);
+    HashMap<Integer, Integer> player_2_map=transToMap(player_2);
+    if (player_1_map.size()<player_2_map.size()){
       return "Player 1 wins";
     }
-    if (player_1_set.size()>player_2_set.size()) {
+    if (player_1_map.size()>player_2_map.size()) {
+      return "Player 2 wins";
+    }
+    if (countMapMaxNum(player_1_map)<countMapMaxNum(player_2_map)){
       return "Player 2 wins";
     }
     if(isPlayer2Win(player_1,player_2)){
@@ -34,6 +37,10 @@ public class PockerHands {
     return player_1_maxNum<player_2_maxNum;
   }
 
+//  int getMaxNumber(ArrayList<Integer> player_numbers){
+//
+//  }
+
   private ArrayList<Integer> transToArrayList(String[] player) {
     ArrayList<Integer> player_numbers = new ArrayList<>();
     for (String s : player) {
@@ -50,13 +57,31 @@ public class PockerHands {
     return player_numbers;
   }
 
-  private HashSet<Character> transToSet(String[] player){
-    HashSet<Character> player_set=new HashSet<>();
-    for (String s : player) {
-      player_set.add(s.charAt(0));
+  private HashMap<Integer, Integer> transToMap(String[] player){
+    ArrayList<Integer> player_numbers = transToArrayList(player);
+    Collections.max(player_numbers);
+    HashMap<Integer, Integer> player_map=new HashMap<>();
+    for (Integer player_number : player_numbers) {
+      if (player_map.containsKey(player_number)){
+        player_map.put(player_number,player_map.get(player_number)+1);
+      }
+      else {
+        player_map.put(player_number,1);
+      }
     }
-    return player_set;
+    return player_map;
   }
 
+  private Integer countMapMaxNum(HashMap<Integer, Integer> hashMap){
+    int max=0;
+    Integer maxCount=0;
+    for (Entry<Integer, Integer> characterIntegerEntry : hashMap.entrySet()) {
+      if (characterIntegerEntry.getValue()>=maxCount){
+        maxCount = characterIntegerEntry.getValue();
+        max= characterIntegerEntry.getKey();
+      }
+    }
+    return max;
+  }
 
 }
