@@ -19,6 +19,22 @@ public class PockerHands {
     boolean isPlayer_2_Straight = isStraight(player_2);
     boolean isPlayer_1_Flush = isFlush(player_1);
     boolean isPlayer_2_Flush = isFlush(player_2);
+    boolean isPlayer_1_FullHouse=isFullHouse(player_1_map);
+    boolean isPlayer_2_FullHouse=isFullHouse(player_2_map);
+    if(isPlayer_1_FullHouse&&isPlayer_2_FullHouse){
+      if (player_1_number[0]<player_2_number[0]){
+        return "Player 2 wins";
+      }
+      if (player_1_number[0]>player_2_number[0]){
+        return "Player 1 wins";
+      }
+    }
+    if(isPlayer_1_FullHouse){
+      return "Player 1 wins";
+    }
+    if (isPlayer_2_FullHouse){
+      return "Player 2 wins";
+    }
     if(isPlayer_1_Flush){
       return "Player 1 wins";
     }
@@ -56,6 +72,10 @@ public class PockerHands {
       return "Player 2 wins";
     }
     return "Player 1 wins";
+  }
+  private boolean isFullHouse(HashMap<Integer, Integer> player_map) {
+    Integer[] player_number=countMapMaxNum(player_map);
+    return (player_number[1]==3&&player_map.size()==2);
   }
 
   private boolean isStraight(String[] player) {
