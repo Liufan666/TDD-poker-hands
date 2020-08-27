@@ -23,6 +23,14 @@ public class PockerHands {
     boolean isPlayer_2_FullHouse=isFullHouse(player_2_map);
     boolean isPlayer_1_isFourOfAKind=isFourOfAKind(player_1_map);
     boolean isPlayer_2_isFourOfAKind=isFourOfAKind(player_2_map);
+    if(isPlayer_1_isFourOfAKind&&isPlayer_1_isFourOfAKind){
+      if (player_1_number[0]<player_2_number[0]){
+        return "Player 2 wins";
+      }
+      if (player_1_number[0]>player_2_number[0]){
+        return "Player 1 wins";
+      }
+    }
     if(isPlayer_1_isFourOfAKind){
       return "Player 1 wins";
     }
