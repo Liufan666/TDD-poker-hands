@@ -17,6 +17,14 @@ public class PockerHands {
     Integer[] player_2_number=countMapMaxNum(player_2_map);
     boolean isPlayer_1_Straight = isStraight(player_1);
     boolean isPlayer_2_Straight = isStraight(player_2);
+    boolean isPlayer_1_Flush = isFlush(player_1);
+    boolean isPlayer_2_Flush = isFlush(player_2);
+    if(isPlayer_1_Flush){
+      return "Player 1 wins";
+    }
+    if(isPlayer_2_Flush){
+      return "Player 2 wins";
+    }
     if(isPlayer_1_Straight && isPlayer_2_Straight){
       if(isPlayer2Win(player_1,player_2)){
         return "Player 2 wins";
@@ -62,6 +70,15 @@ public class PockerHands {
     return false;
   }
 
+  private boolean isFlush(String[] player) {
+    boolean flag=false;
+    HashSet hashSet= new HashSet();
+    for (String s : player) {
+      hashSet.add(s.charAt(1));
+    }
+    return hashSet.size()==1;
+  }
+
   boolean isPlayer2Win(String[] player_1, String[] player_2){
     ArrayList<Integer> player_1_numbers = transToArrayList(player_1);
     ArrayList<Integer> player_2_numbers = transToArrayList(player_2);
@@ -70,10 +87,6 @@ public class PockerHands {
     int player_2_maxNum = Collections.max(player_2_numbers);
     return player_1_maxNum<player_2_maxNum;
   }
-
-//  int getMaxNumber(ArrayList<Integer> player_numbers){
-//
-//  }
 
   private ArrayList<Integer> transToArrayList(String[] player) {
     ArrayList<Integer> player_numbers = new ArrayList<>();
