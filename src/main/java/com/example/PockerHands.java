@@ -23,7 +23,21 @@ public class PockerHands {
     boolean isPlayer_2_FullHouse=isFullHouse(player_2_map);
     boolean isPlayer_1_isFourOfAKind=isFourOfAKind(player_1_map);
     boolean isPlayer_2_isFourOfAKind=isFourOfAKind(player_2_map);
-    if(isPlayer_1_isFourOfAKind&&isPlayer_1_isFourOfAKind){
+    boolean isPlayer_1_isStraightFlush=isStraightFlush(player_1);
+    boolean isPlayer_2_isStraightFlush=isStraightFlush(player_2);
+    if(isPlayer_1_isStraightFlush&&isPlayer_1_isStraightFlush){
+      if(isPlayer2Win(player_1,player_2)){
+        return "Player 2 wins";
+      }
+      return "Player 1 wins";
+    }
+    if(isPlayer_1_isStraightFlush){
+      return "Player 1 wins";
+    }
+    if(isPlayer_2_isStraightFlush){
+      return "Player 2 wins";
+    }
+    if(isPlayer_1_isFourOfAKind&&isPlayer_2_isFourOfAKind){
       if (player_1_number[0]<player_2_number[0]){
         return "Player 2 wins";
       }
@@ -88,6 +102,10 @@ public class PockerHands {
       return "Player 2 wins";
     }
     return "Player 1 wins";
+  }
+
+  private boolean isStraightFlush(String[] player) {
+    return isStraight(player)&&isFlush(player);
   }
 
   private boolean isFourOfAKind(HashMap<Integer, Integer> player_map) {
